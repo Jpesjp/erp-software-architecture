@@ -20,33 +20,52 @@ Hruschka y Dr. Gernot Starke.
 
 # Introducción y Metas {#ection-introduction-and-goals}
 Objetivo: Centralizar la gestión operativa de la empresa. El Módulo de Compras busca optimizar el ciclo de adquisición de suministros.
+
 ## Vista de Requerimientos {#_vista_de_requerimientos}
+Gestión de Catálogo: Registro y mantenimiento de productos con información técnica.
+Gestión de Proveedores: Homologación y control de estados de proveedores.
+Ciclo de Compra: Automatización en la generación de órdenes de compra.
+Control de Gastos: Flujo de aprobación obligatorio para montos superiores a un umbral definido.
+
 
 ## Metas de Calidad {#_metas_de_calidad}
+Rendimiento: Uso de FastAPI para garantizar tiempos de respuesta bajos.
+Integridad: Implementación de PostgreSQL para asegurar que ninguna orden de compra quede huérfana.
+Escalabilidad: Arquitectura desacoplada mediante una SPA en React y una API RESTful.
 
 ## Partes interesadas (Stakeholders) {#_partes_interesadas_stakeholders}
 
 +-------------+---------------------------+---------------------------+
 | Rol/Nombre  | Contacto                  | Expectativas              |
 +=============+===========================+===========================+
-| *           | *\<Contact-1\>*           | *\<Expectation-1\>*       |
-| \<Role-1\>* |                           |                           |
+| *           | *\<	PO del Proyecto\>*           | *\<Maximizar el ROI mediante el control de costos de proveedores.\>*       |
+| \<Product Owner\>* |                           |                           |
 +-------------+---------------------------+---------------------------+
-| *           | *\<Contact-2\>*           | *\<Expectation-2\>*       |
-| \<Role-2\>* |                           |                           |
+| *           | *\<Dev Teeam\>*           | *\<Contar con historias de usuario claras y criterios de aceptación técnicos.\>*       |
+| \<Equipo de Desarrollo\>* |                           |                           |
++-------------+---------------------------+---------------------------+
+| *           | *\<CFO\>*           | *\<Asegurar que todas las compras pasen por el flujo de aprobación.\>*       |
+| \<Depto. Finanzas\>* |                           |                           |
 +-------------+---------------------------+---------------------------+
 
 # Restricciones de la Arquitectura {#section-architecture-constraints}
-
+Tecnología: El backend debe ejecutarse en entornos compatibles con Python 3.10+.
+Seguridad: Toda comunicación debe ser cifrada vía HTTPS/TLS.
+Persistencia: Se debe utilizar una base de datos relacional para soportar reportes históricos.
 # Alcance y Contexto del Sistema {#section-context-and-scope}
-
+El sistema ERP actúa como mediador entre los empleados internos y las entidades externas (Proveedores y Sistemas Contables
 ## Contexto de Negocio {#_contexto_de_negocio}
-
+Entradas: Datos de productos, órdenes manuales, autorizaciones de gerencia.
+Salidas: Órdenes de compra en PDF, asientos contables para el sistema externo, correos de notificación.
 **\<Diagrama o Tabla\>**
 
 **\<optionally: Explanation of external domain interfaces\>**
 
 ## Contexto Técnico {#_contexto_técnico}
+Entradas: Datos de productos, órdenes manuales, autorizaciones de gerencia.
+Salidas: Órdenes de compra en PDF, asientos contables para el sistema externo, correos de notificación.
+Estrategia de solución
+Se optó por una arquitectura de Contenedores Independientes para separar la interfaz de la lógica. Esto permite actualizar el módulo de compras sin afectar otros módulos del ERP en el futuro.
 
 **\<Diagrama o Tabla\>**
 
