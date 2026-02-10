@@ -1,5 +1,5 @@
 ---
-date: Enero 2023
+date: Enero 2026
 title: Plantilla ![arc42](images/arc42-logo.png)
 ---
 
@@ -18,8 +18,8 @@ Revisión de la plantilla: 7.0 ES (basada en asciidoc), Enero 2017
 arquitectura arc42, <https://www.arc42.org>. Creada por Dr. Peter
 Hruschka y Dr. Gernot Starke.
 
-# Introducción y Metas {#section-introduction-and-goals}
-
+# Introducción y Metas {#ection-introduction-and-goals}
+Objetivo: Centralizar la gestión operativa de la empresa. El Módulo de Compras busca optimizar el ciclo de adquisición de suministros.
 ## Vista de Requerimientos {#_vista_de_requerimientos}
 
 ## Metas de Calidad {#_metas_de_calidad}
