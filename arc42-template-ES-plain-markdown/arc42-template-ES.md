@@ -3,7 +3,7 @@ date: Enero 2026
 title: Plantilla ![arc42](images/arc42-logo.png)
 ---
 
-# 
+#
 
 **Acerca de arc42**
 
@@ -19,221 +19,257 @@ arquitectura arc42, <https://www.arc42.org>. Creada por Dr. Peter
 Hruschka y Dr. Gernot Starke.
 
 # Introducción y Metas {#ection-introduction-and-goals}
-Objetivo: Centralizar la gestión operativa de la empresa. El Módulo de Compras busca optimizar el ciclo de adquisición de suministros.
+
+Objetivo: Centralizar la gestión del talento humano y automatizar el cálculo de nómina mediante un sistema ERP basado en la nube.
 
 ## Vista de Requerimientos {#_vista_de_requerimientos}
-Gestión de Catálogo: Registro y mantenimiento de productos con información técnica.
-Gestión de Proveedores: Homologación y control de estados de proveedores.
-Ciclo de Compra: Automatización en la generación de órdenes de compra.
-Control de Gastos: Flujo de aprobación obligatorio para montos superiores a un umbral definido.
 
+Gestión de Empleados: Registro, actualización y consulta de información personal y laboral.  
+Gestión de Nómina: Cálculo automático de salarios, deducciones y bonificaciones.  
+Control de Asistencia: Registro de horas trabajadas y ausencias.  
+Reportes: Generación de informes administrativos y financieros.
 
 ## Metas de Calidad {#_metas_de_calidad}
-Rendimiento: Uso de FastAPI para garantizar tiempos de respuesta bajos.
-Integridad: Implementación de PostgreSQL para asegurar que ninguna orden de compra quede huérfana.
-Escalabilidad: Arquitectura desacoplada mediante una SPA en React y una API RESTful.
+
+Rendimiento: Uso de FastAPI para garantizar tiempos de respuesta bajos.  
+Integridad: Uso de MongoDB Atlas para asegurar consistencia de datos.  
+Escalabilidad: Arquitectura desacoplada con SPA en React y API REST.  
+Disponibilidad: Servicios desplegados en la nube con alta disponibilidad.
 
 ## Partes interesadas (Stakeholders) {#_partes_interesadas_stakeholders}
 
-+-------------+---------------------------+---------------------------+
-| Rol/Nombre  | Contacto                  | Expectativas              |
-+=============+===========================+===========================+
-| *           | *\<	PO del Proyecto\>*           | *\<Maximizar el ROI mediante el control de costos de proveedores.\>*       |
-| \<Product Owner\>* |                           |                           |
-+-------------+---------------------------+---------------------------+
-| *           | *\<Dev Teeam\>*           | *\<Contar con historias de usuario claras y criterios de aceptación técnicos.\>*       |
-| \<Equipo de Desarrollo\>* |                           |                           |
-+-------------+---------------------------+---------------------------+
-| *           | *\<CFO\>*           | *\<Asegurar que todas las compras pasen por el flujo de aprobación.\>*       |
-| \<Depto. Finanzas\>* |                           |                           |
-+-------------+---------------------------+---------------------------+
++-------------+---------------------------+-----------------------------------------------+
+| Rol/Nombre  | Contacto                  | Expectativas                                  |
++=============+===========================+===============================================+
+| Product     | PO del Proyecto           | Maximizar eficiencia en gestión de personal  |
+| Owner       |                           |                                               |
++-------------+---------------------------+-----------------------------------------------+
+| Equipo de   | Dev Team                  | Contar con requisitos claros y estables      |
+| Desarrollo  |                           |                                               |
++-------------+---------------------------+-----------------------------------------------+
+| Gerencia    | Dirección General         | Control total sobre nómina y costos laborales|
++-------------+---------------------------+-----------------------------------------------+
+| RRHH        | Departamento RRHH         | Automatizar procesos operativos              |
++-------------+---------------------------+-----------------------------------------------+
 
 # Restricciones de la Arquitectura {#section-architecture-constraints}
-Tecnología: El backend debe ejecutarse en entornos compatibles con Python 3.10+.
-Seguridad: Toda comunicación debe ser cifrada vía HTTPS/TLS.
-Persistencia: Se debe utilizar una base de datos relacional para soportar reportes históricos.
-# Alcance y Contexto del Sistema {#section-context-and-scope}
-El sistema ERP actúa como mediador entre los empleados internos y las entidades externas (Proveedores y Sistemas Contables
-## Contexto de Negocio {#_contexto_de_negocio}
-Entradas: Datos de productos, órdenes manuales, autorizaciones de gerencia.
-Salidas: Órdenes de compra en PDF, asientos contables para el sistema externo, correos de notificación.
-**\<Diagrama o Tabla\>**
 
-**\<optionally: Explanation of external domain interfaces\>**
+Tecnología: Backend compatible con Python 3.10+.  
+Seguridad: Uso obligatorio de HTTPS/TLS y JWT.  
+Persistencia: Bases de datos NoSQL en la nube.  
+Infraestructura: Uso exclusivo de servicios cloud.
+
+# Alcance y Contexto del Sistema {#section-context-and-scope}
+
+El sistema ERP gestiona información de empleados y procesos de nómina, interactuando con usuarios internos y sistemas externos.
+
+## Contexto de Negocio {#_contexto_de_negocio}
+
+Entradas: Datos personales, registros de asistencia, salarios.  
+Salidas: Comprobantes de nómina, reportes financieros, notificaciones.
+
+**Diagrama: Contexto de Negocio**
+
+Usuarios → ERP RRHH → Reportes / Sistemas Externos
+
+**Interfases externas:** Sistema contable, correo institucional.
 
 ## Contexto Técnico {#_contexto_técnico}
-Entradas: Datos de productos, órdenes manuales, autorizaciones de gerencia.
-Salidas: Órdenes de compra en PDF, asientos contables para el sistema externo, correos de notificación.
-Estrategia de solución
-Se optó por una arquitectura de Contenedores Independientes para separar la interfaz de la lógica. Esto permite actualizar el módulo de compras sin afectar otros módulos del ERP en el futuro.
 
-**\<Diagrama o Tabla\>**
+Entradas: Formularios web, archivos CSV, peticiones API.  
+Salidas: Respuestas JSON, archivos PDF, reportes.
 
-**\<Opcional: Explicación de las interfases técnicas\>**
+Estrategia de solución:
 
-**\<Mapeo de Entrada/Salida a canales\>**
+Se implementa una arquitectura de microservicios en contenedores para aislar funcionalidades.
+
+**Diagrama: Contexto Técnico**
+
+Frontend → API → Base de Datos → Servicios ML
+
+**Mapeo Entrada/Salida:**
+
+Web → HTTPS → API → MongoDB → Reportes
 
 # Estrategia de solución {#section-solution-strategy}
+
+Se adopta una arquitectura basada en microservicios, CI/CD automatizado y procesamiento de datos con enfoque MLOps.
 
 # Vista de Bloques {#section-building-block-view}
 
 ## Sistema General de Caja Blanca {#_sistema_general_de_caja_blanca}
 
-***\<Diagrama general\>***
+***Diagrama General***
+
+Frontend → API Gateway → Servicios → Base de Datos
 
 Motivación
 
-:   *\<Explicación en texto\>*
+:   Separar responsabilidades para facilitar mantenimiento.
 
 Bloques de construcción contenidos
 
-:   *\<Desripción de los bloques de construcción contenidos (Cajas
-    negras)\>*
+:   Frontend, Backend, ETL, ML, Base de Datos.
 
 Interfases importantes
 
-:   *\<Descripción de las interfases importantes\>*
+:   REST API, Conectores de datos.
 
-### \<Caja Negra 1\> {#_caja_negra_1}
+### API RRHH {#_caja_negra_1}
 
-*\<Propósito/Responsabilidad\>*
+Gestión de empleados.
 
-*\<Interfase(s)\>*
+Interfase: REST / JSON
 
-*\<(Opcional) Características de Calidad/Performance\>*
+Performance: < 300 ms
 
-*\<(Opcional) Ubicación Archivo/Directorio\>*
+Ubicación: /backend/api
 
-*\<(Opcional) Requerimientos Satisfechos\>*
+Requerimientos: HU-01, HU-02
 
-*\<(Opcional) Riesgos/Problemas/Incidentes Abiertos\>*
+Riesgos: Sobrecarga en horas pico.
 
-### \<Caja Negra 2\> {#_caja_negra_2}
+### Servicio Nómina {#_caja_negra_2}
 
-*\<plantilla de caja negra\>*
+Cálculo de pagos.
 
-### \<Caja Negra N\> {#_caja_negra_n}
+### Módulo ETL {#_caja_negra_n}
 
-*\<Plantilla de caja negra\>*
+Procesamiento de datos.
 
-### \<Interfase 1\> {#_interfase_1}
+### API REST {#_interfase_1}
 
-...​
+Comunicación cliente-servidor.
 
-### \<Interfase m\> {#_interfase_m}
+### Conector MongoDB {#_interfase_m}
+
+Acceso a datos.
 
 ## Nivel 2 {#_nivel_2}
 
-### Caja Blanca *\<bloque de construcción 1\>* {#_caja_blanca_bloque_de_construcción_1}
+### Caja Blanca Backend
 
-*\<plantilla de caja blanca\>*
+Controladores, servicios, repositorios.
 
-### Caja Blanca *\<bloque de construcción 2\>* {#_caja_blanca_bloque_de_construcción_2}
+### Caja Blanca Data Layer
 
-*\<plantilla de caja blanca\>*
-
-...​
-
-### Caja Blanca *\<bloque de construcción m\>* {#_caja_blanca_bloque_de_construcción_m}
-
-*\<plantilla de caja blanca\>*
+Persistencia y cache.
 
 ## Nivel 3 {#_nivel_3}
 
-### Caja Blanca \<\_bloque de construcción x.1\_\> {#_caja_blanca_bloque_de_construcción_x_1}
+### Caja Blanca API Empleados
 
-*\<plantilla de caja blanca\>*
+Validación y lógica de negocio.
 
-### Caja Blanca \<\_bloque de construcción x.2\_\> {#_caja_blanca_bloque_de_construcción_x_2}
+### Caja Blanca Nómina
 
-*\<plantilla de caja blanca\>*
+Cálculo de deducciones.
 
-### Caja Blanca \<\_bloque de construcción y.1\_\> {#_caja_blanca_bloque_de_construcción_y_1}
+### Caja Blanca ETL
 
-*\<plantilla de caja blanca\>*
+Limpieza y transformación.
 
 # Vista de Ejecución {#section-runtime-view}
 
-## \<Escenario de ejecución 1\> {#_escenario_de_ejecución_1}
+## Registro de Empleado {#_escenario_de_ejecución_1}
 
--   *\<Inserte un diagrama de ejecución o la descripción del
-    escenario\>*
+- Usuario envía formulario.
+- API valida datos.
+- Se guarda en MongoDB.
+- Se retorna confirmación.
 
--   *\<Inserte la descripción de aspectos notables de las interacciones
-    entre los bloques de construcción mostrados en este diagrama.\>*
+## Cálculo de Nómina {#_escenario_de_ejecución_2}
 
-## \<Escenario de ejecución 2\> {#_escenario_de_ejecución_2}
-
-## ...​
-
-## \<Escenario de ejecución n\> {#_escenario_de_ejecución_n}
+- Sistema procesa datos.
+- Calcula pagos.
+- Genera reporte.
 
 # Vista de Despliegue {#section-deployment-view}
 
 ## Nivel de infraestructura 1 {#_nivel_de_infraestructura_1}
 
-***\<Diagrama General\>***
+***Diagrama General***
+
+Navegador → Cloud API → DB Cloud
 
 Motivación
 
-:   *\<Explicación en forma textual\>*
+:   Garantizar acceso remoto.
 
-Características de Calidad/Rendimiento
+Características de Calidad
 
-:   *\<Explicación en forma textual\>*
+:   Alta disponibilidad y escalabilidad.
 
-    Mapeo de los Bloques de Construcción a Infraestructura
+Mapeo
 
-    :   *\<Descripción del mapeo\>*
+:   Servicios → Contenedores → Nube.
 
 ## Nivel de Infraestructura 2 {#_nivel_de_infraestructura_2}
 
-### *\<Elemento de Infraestructura 1\>* {#_elemento_de_infraestructura_1}
+### GitHub Codespaces
 
-*\<diagrama + explicación\>*
+Desarrollo remoto.
 
-### *\<Elemento de Infraestructura 2\>* {#_elemento_de_infraestructura_2}
+### Google Colab
 
-*\<diagrama + explicación\>*
+Procesamiento ETL.
 
-...​
+### Databricks
 
-### *\<Elemento de Infraestructura n\>* {#_elemento_de_infraestructura_n}
-
-*\<diagrama + explicación\>*
+Big Data.
 
 # Conceptos Transversales (Cross-cutting) {#section-concepts}
 
-## *\<Concepto 1\>* {#_concepto_1}
+## Seguridad
 
-*\<explicación\>*
+Autenticación JWT y roles.
 
-## *\<Concepto 2\>* {#_concepto_2}
+## Logging
 
-*\<explicación\>*
+Registro centralizado.
 
-...​
+## CI/CD
 
-## *\<Concepto n\>* {#_concepto_n}
+Automatización con GitHub Actions.
 
-*\<explicación\>*
+## MLOps
+
+Entrenamiento reproducible.
 
 # Decisiones de Diseño {#section-design-decisions}
 
+Uso de FastAPI por rendimiento.  
+Uso de MongoDB por flexibilidad.  
+Uso de contenedores por portabilidad.
+
 # Requerimientos de Calidad {#section-quality-scenarios}
 
-## Árbol de Calidad {#_árbol_de_calidad}
+## Árbol de Calidad
 
-## Escenarios de calidad {#_escenarios_de_calidad}
+Disponibilidad → Rendimiento → Seguridad → Escalabilidad
+
+## Escenarios de calidad
+
+- Respuesta < 2s con 500 usuarios.
+- Recuperación ante fallos en < 5 min.
+- Acceso seguro 24/7.
 
 # Riesgos y deuda técnica {#section-technical-risks}
+
+Dependencia de servicios gratuitos.  
+Escalabilidad limitada en versión community.  
+Falta de pruebas automatizadas completas.
 
 # Glosario {#section-glossary}
 
 +----------------------+-----------------------------------------------+
 | Término              | Definición                                    |
 +======================+===============================================+
-| *\<Término-1\>*      | *\<definicion-1\>*                            |
+| API                  | Interfaz de programación de aplicaciones     |
 +----------------------+-----------------------------------------------+
-| *\<Término-2\>*      | *\<definicion-2\>*                            |
+| ETL                  | Extracción, Transformación y Carga            |
++----------------------+-----------------------------------------------+
+| MLOps                | Operaciones de Machine Learning               |
++----------------------+-----------------------------------------------+
+| CI/CD                | Integración y Despliegue Continuo             |
 +----------------------+-----------------------------------------------+
